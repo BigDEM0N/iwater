@@ -15,7 +15,7 @@ from iwater.db import get_db
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
-
+# 后台首页
 @bp.route('/')
 @admin_required
 def index():
