@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}admin-index{% endblock %}</h1>
+    <h1>{% block title %}user_list{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-    {{ user }}
+    {% for user in users %}
+        id:{{ user['id'] }}
+        username:{{ user['username'] }}
+        status:{{ user['status'] }}
+    {% endfor %}
 {% endblock %}

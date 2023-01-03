@@ -107,10 +107,11 @@ def login_required(view):
 def admin_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if g.user['id'] != '1':
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+        elif g.user['username'] != 'admin':
             flash('必须是超级管理员')
             return redirect(url_for('auth.login'))
-
         return view(**kwargs)
 
     return wrapped_view
