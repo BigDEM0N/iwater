@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>管理员中心</title>
+    </head>
+
+    <body>
+    {% for database in databases %}
+    {{ database }}----{{ databases.get(database) }}<br>
+    {% endfor %}
+    </body>
+</html>

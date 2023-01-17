@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+
+        </script>
+        <meta charset="UTF-8">
+        <title>商品管理</title>
+    </head>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msgs in messages %}
+                    <div class="alert alert-info" role="alert">
+                        {{msgs}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    <body>
+    用户：{{ username }}
+    <br>
+    添加商品
+    <div>
+        <form action="{{ url_for('supplier.item_add') }}" method="post">
+            <p><input type="text" name="item_name" placeholder="输入商品名称"></p>
+            <p><input type="submit" value="添加"></p>
+        </form>
+{#        <label>#}
+{#            <input type="text" name="item_name" placeholder="输入商品名称">#}
+{#        </label>#}
+{#        <input type="button" value="添加" id="add">#}
+    </div>
+
+
+    </body>
+
+</html>

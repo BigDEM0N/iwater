@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>企业中心</title>
+    </head>
+
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msgs in messages %}
+                    <div class="alert alert-info" role="alert">
+                        {{msgs}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    <body class="size-1140">
+        <a href="javascript:;" onclick="item('{{ username }}')">商品管理</a>
+
+    </body>
+    <script>
+        function item(username){
+            location.href = '/supplier_center/items'
+        }
+    </script>
+</html>
