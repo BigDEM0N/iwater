@@ -1,17 +1,15 @@
 # ./apps/supplier/view.py
-import json
-# .\apps\user\view.py
-
-# 创建user的蓝图对象
-from flask import Blueprint, render_template, request, flash, session, url_for, redirect
+from flask import render_template, request, flash, session, url_for, redirect,Blueprint
 from apps.supplier.models import Supplier
 import hashlib
-from apps.exts.create_database import create_database
-from apps.items.models import Items, db
+from apps.exts.create_database import create_database, create_supplier_table
+from apps.exts.dbinfo_save import dbinfo_save
+from apps.items.models import Items
 import pymysql
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+# 创建supplier的蓝图对象
 supplier_bp = Blueprint('supplier', __name__)
 
 
@@ -55,29 +53,41 @@ def supplier_register():
         # print(password)
         repassword = request.form.get('repassword')
         if password == repassword:
-            supplier = Supplier()  # 实例化user对象
+
+            # 创建数据表
+            if create_supplier_table():
+                pass
+            else:
+                flash("注册错误，请联系管理员 error:01")
+                return render_template('supplier/supplier_register.html')
+
+            # 验证用户名唯一
+            user_list = Supplier.query.all()
+            for user in user_list:
+                if username == user.username:
+                    flash("该用户名已被使用")
+                    return render_template('supplier/supplier_register.html')
+                else:
+                    pass
+
+            # 实例化user对象
+            supplier = Supplier()
             supplier.identity = 'supplier'
             supplier.username = username
             supplier.password = hashlib.sha256(str(password).encode(encoding='utf-8')).hexdigest()
-            db.session.add(supplier)
-            db.session.commit()
-            create_database(username)  # 创建各个企业的数据库
+
+            # 提交企业信息至suppliers数据表
+            engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/db_user')
+            Session = sessionmaker(bind=engine)
+            sess = Session()
+            sess.add(supplier)
+            sess.commit()
+            # db.session.add(supplier)
+            # db.session.commit()
+            create_database(username)  # 创建各个企业的数据库 #转到admin页面
 
             # 存储企业数据库信息
-            tf = open("./data/database.json", 'r')
-            my_dict = json.load(tf)
-            tf.close()
-            my_dict[username] = 'mysql+pymysql://root:123456@127.0.0.1:3306/'+username
-            tf = open("./data/database.json", 'w')
-            json.dump(my_dict, tf)
-            tf.close()
-
-            # 创建表
-            # conn = pymysql.connect(host='localhost', user='root', password='123456')
-            # cursor = conn.cursor()
-            # cursor.execute('use '+username)
-            # cursor.execute('create table "items"("name" varchar(10) not null ,"id" int auto_increment, \
-            # "info" varchar(256), "price" float)')
+            dbinfo_save(username)
 
             # 清除网页缓存
             session.clear()
@@ -86,7 +96,10 @@ def supplier_register():
             flash("注册成功")
             return render_template('supplier/supplier_center.html')
         else:
+            flash("两次输入的密码不一致")
             return render_template('supplier/supplier_register.html')
+    else:
+        pass
     return render_template('supplier/supplier_register.html')
 
 

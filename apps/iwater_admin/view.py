@@ -1,11 +1,10 @@
 # ./apps/iwater_admin/view.py
 
-from flask import Blueprint, render_template, request, flash, redirect, url_for, session
+from flask import render_template, request, flash, redirect, url_for, session, Blueprint
 from apps.iwater_admin.models import Admin
 import hashlib
 from apps.exts import db
 import json
-
 
 admin_bp = Blueprint('admin', __name__)
 
