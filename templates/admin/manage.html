@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理中心</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../static/css/style.css" type="text/css">
+
+</head>
+
+<body>
+
+    <!-- header -->
+    <div class="header_top">
+        <div class="header_top_left">
+            <a href="{{ url_for('index') }}"><img src="../../static/images/logo.png" height="60" width="60" id="header_top_left_logo" alt=""></a>
+            <a href="{{ url_for('index') }}"><div class="name">iWater | 管理中心</div></a>
+        </div>
+        <div class="header_top_mid">
+            <ul>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">企业管理</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">用户管理</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">订单总览</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">商品管理</a></li>
+            </ul>
+        </div>
+        <div class="header_top_right">
+            <a class="logout" href="user.logout" >退出登录</a>
+        </div>
+    </div>
+    <!-- header end -->
+
+    <!-- hero body -->
+    <div class="supplier_list">
+        <ul class="supplier_list_head">
+            <li class="supplier_list_head_text">企业名称</li>
+            <li class="supplier_list_head_text">ID</li>
+            <li class="supplier_list_head_text">服务</li>
+            <li class="supplier_list_head_text">启用</li>
+        </ul>
+        {% for supplier in supplier_list %}
+            <ul class="supplier_list_content">
+                <li class="supplier_list_content_text">{{ supplier.username }}</li>
+                <li class="supplier_list_content_text">{{ supplier.id }}</li>
+                <li class="supplier_list_content_text">{{ supplier.server_on }}</li>
+                <li class="supplier_list_content_text">{{ supplier.isvalid }}</li>
+                <li class="supplier_list_content_text"><a class="supplier_list_details" href="{{ url_for('admin.supplier_details') }}?id={{ supplier.id }}">详情</a></li>
+            </ul>
+        {% endfor %}
+
+    </div>
+</body>

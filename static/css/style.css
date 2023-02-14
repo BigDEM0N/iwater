@@ -1,0 +1,148 @@
+.name{
+	height: 60px;
+	color: mediumturquoise;
+	padding: 10px 20px 20px 60px;
+	display: inline-block;
+	font-size: 40px;
+}
+
+a{
+	text-decoration: none;
+	color: initial;
+	transition: color 0.6s;
+}
+
+.activate_switch:hover{
+	color: darkturquoise;
+}
+
+.header_top_left{
+	display: inline-block;
+	width: auto;
+}
+
+#header_top_left_logo{
+	position: absolute;
+
+}
+
+.header_top_mid{
+	text-align: center;
+	display: inline-block;
+}
+
+.header_top_mid_content{
+	display: inline-block;
+	font-family: 微软雅黑, serif;
+	padding:10px 20px 10px 20px;
+}
+
+.header_top_mid_content_text{
+	text-decoration: none;
+	transition: font-size 0.6s;
+}
+
+.header_top_mid_content_text:link{
+	color:black;
+}
+
+.header_top_mid_content_text:visited{
+	color:black;
+}
+
+.header_top_mid_content_text:hover{
+	color:darkcyan;
+	font-size: large;
+}
+
+.header_top_right{
+	position: relative;
+	padding: 20px 30px 10px;
+	float: right;
+	display: inline-block;
+
+}
+
+.supplier_list_head_text{
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+}
+
+.supplier_list_content_text{
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.supplier_list{
+	padding-left: 120px;
+}
+
+.supplier_list_details{
+	color: initial;
+}
+
+.supplier_details_content_text{
+	display: inline-block;
+	width: 400px;
+	height: 200px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.supplier_details_head_text{
+	display: inline-block;
+	width: 400px;
+}
+
+.items_table_head_text{
+	display: inline-block;
+	position: relative;
+	width: 18%;
+}
+
+.items_table_show_content_text{
+	display: inline-block;
+	position: relative;
+	width: 18%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.items_table{
+	position: absolute;
+	width: 70%;
+}
+
+.item_commit{
+	float: right;
+	padding-right: 20%;
+	padding-top: 100px;
+}
+
+.item_details{
+	position: absolute;
+	width: 1000px;
+}
+
+.item_details_head_text{
+	display: inline-block;
+	width: 20%;
+}
+
+.item_details_content_text{
+	display: inline-block;
+	width: 20%;
+}
+
+.login_header{
+}
+
+.login_form{
+}

@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <title>个人中心</title>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <title>iWater | 用户中心</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../static/css/style.css" type="text/css">
+
+</head>
 
     <body class="size-1140">
      {% with messages = get_flashed_messages() %}
@@ -16,5 +21,35 @@
             {% endif %}
         {% endwith %}
 
+     <!-- header -->
+    <div class="header_top">
+        <div class="header_top_left">
+            <a href="{{ url_for('index') }}"><img src="../../static/images/logo.png" height="60" width="60" id="header_top_left_logo" alt=""></a>
+            <a href="{{ url_for('index') }}"><div class="name">iWater | 企业中心</div></a>
+        </div>
+        <div class="header_top_mid">
+            <ul>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">商品</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">购物车</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">历史订单</a></li>
+            </ul>
+        </div>
+        <div class="header_top_right">
+            <p >用户：{{ session.get('username') }}<a class="logout" href="{{ url_for('user.logout') }}" >退出登录</a></p>
+        </div>
+    </div>
+    <!-- header end -->
+
+    <!-- hero body -->
+    <div class="goods_table">
+        {% for item in item_list %}
+        <ul class="goods_table_show">
+            <li class="goods_table_show_text">{{ item.name }}</li>
+            <li class="goods_table_show_text">{{ item.info }}</li>
+            <li class="goods_table_show_text">{{ item.price }}</li>
+            <li class="goods_table_show_text"><a href="{{ url_for('supplier.add_to_cart') }}">加入购物车</a></li>
+        </ul>
+        {% endfor %}
+    </div>
     </body>
 </html>

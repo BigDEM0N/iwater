@@ -87,6 +87,12 @@ def customer_center():
     return render_template('customer/customer_center.html')
 
 
+@customer_bp.route('/add_to_cart')
+def add_to_cart():
+
+    return redirect(url_for('customer.customer_center'))
+
+
 @customer_bp.route('/market')
 def customer_market():
     if request.method == 'POST':

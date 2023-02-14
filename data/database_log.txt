@@ -1,6 +1,14 @@
 Traceback (most recent call last):
-  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 12, in create_database
-    cursor.execute('create table items(name varchar(10) not null ,id int auto_increment,\
+  File "D:\._Work\Code\FlaskProject\iwater\apps\supplier\view.py", line 192, in item_upgrade
+    sql = "update items set name='%s' where id='%d'" % (name, id)
+TypeError: %d format: a real number is required, not NoneType
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\supplier\view.py", line 193, in item_upgrade
+    sql = "update items set name='%s' where id='%d'" % (name, session.get('id'))
+TypeError: %d format: a real number is required, not NoneType
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\supplier\view.py", line 195, in item_upgrade
+    cursor.execute(sql)
   File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
     result = self._query(query)
   File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
@@ -17,10 +25,74 @@ Traceback (most recent call last):
     err.raise_mysql_exception(self._data)
   File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
     raise errorclass(errno, errval)
-pymysql.err.OperationalError: (1046, 'No database selected')
+pymysql.err.OperationalError: (1292, "Truncated incorrect DOUBLE value: 'None'")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\supplier\view.py", line 195, in item_upgrade
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1292, "Truncated incorrect DOUBLE value: 'None'")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\supplier\view.py", line 193, in item_upgrade
+    cursor.execute('use ' + username)
+UnboundLocalError: local variable 'username' referenced before assignment
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\supplier\view.py", line 200, in item_upgrade
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'price' at row 1")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
 Traceback (most recent call last):
   File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 10, in create_database
-    cursor.execute('create database %s' % name)  # ½¨¿â
+    cursor.execute('create database if not exists %s' % name)  # ½¨¿â
   File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
     result = self._query(query)
   File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
@@ -37,4 +109,264 @@ Traceback (most recent call last):
     err.raise_mysql_exception(self._data)
   File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
     raise errorclass(errno, errval)
-pymysql.err.ProgrammingError: (1007, "Can't create database 'iii'; database exists")
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '222' at line 1")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\exts\create_database.py", line 19, in create_database
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1050, "Table 'items' already exists")
+Traceback (most recent call last):
+  File "D:\._Work\Code\FlaskProject\iwater\apps\supplier\view.py", line 202, in item_upgrade
+    cursor.execute(sql)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\._Work\Code\FlaskProject\iwater\venv\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'price' at row 1")

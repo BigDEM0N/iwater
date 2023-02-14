@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>修改商品</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../static/css/style.css" type="text/css">
+
+</head>
+
+<body>
+
+    <!-- header -->
+    <div class="header_top">
+        <div class="header_top_left">
+            <a href="{{ url_for('index') }}"><img src="../../static/images/logo.png" height="60" width="60" id="header_top_left_logo" alt=""></a>
+            <a href="{{ url_for('index') }}"><div class="name">iWater | 企业中心</div></a>
+        </div>
+        <div class="header_top_mid">
+            <ul>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">商品管理</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">订单管理</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">基础设置</a></li>
+            </ul>
+        </div>
+        <div class="header_top_right">
+            <p >用户：{{ username }}<a class="logout" href="{{ url_for('user.logout') }}" >退出登录</a></p>
+        </div>
+    </div>
+    <!-- header end -->
+
+
+    <!-- hero body -->
+    <div class="item_details">
+        <ul class="item_details_head">
+            <li class="item_details_head_text">商品名称</li>
+            <li class="item_details_head_text">商品信息</li>
+            <li class="item_details_head_text">商品价格</li>
+        </ul>
+         <form class="item_details_content" method="post" action="{{ url_for('supplier.item_upgrade') }}">
+             <ul class="item_details_content_table">
+                 <li class="item_details_content_text"><input type="text" name="name" placeholder="{{name}}"></li>
+                 <li class="item_details_content_text"><input type="text" name="info" placeholder="{{info}}"></li>
+                 <li class="item_details_content_text"><input type="text" name="price" placeholder="{{price}}"></li>
+                 <li class="item_details_content_text"><input type="submit" value="提交"></li>
+             </ul>
+         </form>
+    </div>
+</body>

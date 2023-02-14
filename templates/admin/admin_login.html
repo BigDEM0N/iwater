@@ -2,10 +2,28 @@
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
-        <title>管理员登录</title>
+        <title>iWater | 管理员登录</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../../static/css/style.css" type="text/css">
     </head>
 
     <body>
+    <!-- header -->
+    <div class="header_top">
+        <div class="header_top_left">
+            <a href="{{ url_for('index') }}"><img src="../../static/images/logo.png" height="60" width="60" id="header_top_left_logo" alt=""></a>
+            <a href="{{ url_for('index') }}"><div class="name">iWater | 订水服务</div></a>
+        </div>
+        <div class="header_top_mid">
+            <ul>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="{{url_for('index')}}">首页</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="{{url_for('supplier.supplier_login')}}">企业登录</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="{{url_for('customer.customer_login')}}">用户登录</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="{{url_for('admin.admin_login')}}">管理员登录</a></li>
+            </ul>
+        </div>
+    </div>
     {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for msgs in messages %}
@@ -15,11 +33,11 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-    <h1>管理员登录</h1>
-    <form action="{{ url_for('admin.admin_login') }}" method="post">
-        <p><input type="text" name="username" placeholder="用户名"></p>
-        <p><input type="password" name="password" placeholder="密码"></p>
-        <p><input type="submit" value="登录"></p>
+    <h1 class="login_header">管理员登录</h1>
+    <form class="login_form" action="{{ url_for('admin.admin_login') }}" method="post">
+        <p class="login_form_input"><input type="text" name="username" placeholder="用户名"></p>
+        <p class="login_form_input"><input type="password" name="password" placeholder="密码"></p>
+        <p class="login_form_input"><input type="submit" value="登录"></p>
     </form>
 
     </body>

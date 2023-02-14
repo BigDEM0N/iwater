@@ -1,13 +1,15 @@
 # ./apps/supplier/view.py
-from flask import render_template, request, flash, session, url_for, redirect,Blueprint
+from flask import render_template, request, flash, session, url_for, redirect, Blueprint
 from apps.supplier.models import Supplier
 import hashlib
 from apps.exts.create_database import create_database, create_supplier_table
 from apps.exts.dbinfo_save import dbinfo_save
 from apps.items.models import Items
 import pymysql
+import traceback
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import time
 
 # 创建supplier的蓝图对象
 supplier_bp = Blueprint('supplier', __name__)
@@ -15,7 +17,39 @@ supplier_bp = Blueprint('supplier', __name__)
 
 @supplier_bp.route('/supplier_center')
 def supplier_center():
-    return render_template('supplier/supplier_center.html')
+    identity = session.get('identity')
+    username = session.get('username')
+    if identity == 'supplier':
+        supplier_list = Supplier.query.filter_by(username=username)
+        supplier = supplier_list[0]
+        if supplier.server_on:
+            conn = pymysql.connect(host='localhost', user='root', password='123456')
+            try:
+                cursor = conn.cursor()
+                cursor.execute('use ' + username)
+                sql = '''
+                    select * from items;
+                '''
+                cursor.execute(sql)
+                conn.commit()
+                item_list = cursor.fetchall()
+                print(item_list)
+            except Exception:
+                f = open("./data/database_log.txt", 'a')  # 将异常信息写入日志文件中
+                traceback.print_exc(file=f)
+                f.flush()
+                f.close()
+                conn.rollback()
+            finally:
+                conn.close()
+                return render_template('supplier/supplier_center.html', item_list=item_list, username=username)
+        else:
+            flash('未开启服务')
+            return redirect(url_for('supplier.supplier_login'))
+    else:
+        flash('暂无权限!')
+        'error'
+        return redirect(url_for('supplier.supplier_login'))
 
 
 @supplier_bp.route('/supplier_login', methods=['GET', 'POST'])
@@ -27,8 +61,10 @@ def supplier_login():
         user_list = Supplier.query.filter_by(username=username)
         for user in user_list:
             if user.password == new_password and user.identity == 'supplier':
+                session.clear()
                 session['username'] = username
                 session['password'] = password
+                session['identity'] = user.identity
                 return redirect(url_for('supplier.supplier_center'))
                 # return render_template('supplier/supplier_center.html', username=username)
             else:
@@ -84,7 +120,7 @@ def supplier_register():
             sess.commit()
             # db.session.add(supplier)
             # db.session.commit()
-            create_database(username)  # 创建各个企业的数据库 #转到admin页面
+            # 创建各个企业的数据库 #转到admin页面
 
             # 存储企业数据库信息
             dbinfo_save(username)
@@ -94,7 +130,7 @@ def supplier_register():
             session['username'] = username
             session['password'] = password
             flash("注册成功")
-            return render_template('supplier/supplier_center.html')
+            return redirect(url_for('supplier.supplier_center'))
         else:
             flash("两次输入的密码不一致")
             return render_template('supplier/supplier_register.html')
@@ -117,7 +153,11 @@ def item_add():
     if request.method == 'POST':
         username = session.get('username')
         item = Items(username)
-        item.name = request.form.get('item_name')
+        item.name = request.form.get('name')
+        item.info = request.form.get('info')
+        item.price = request.form.get('price')
+        item.num = username + str(time.time())  # 获得当前时间
+        print(item.num)
         # conn = pymysql.connect(host='localhost', user='root', password='123456')
         # cursor = conn.cursor()
         # cursor.execute('use '+session.get('username'))
@@ -131,5 +171,45 @@ def item_add():
         sess.commit()
         print('ok')
         flash('添加成功')
-        return render_template('supplier/supplier_items.html', username=username)
-    return render_template('supplier/supplier_items.html')
+        return redirect(url_for('supplier.supplier_center'))
+    return render_template('supplier/supplier_center.html')
+
+
+@supplier_bp.route('/supplier_center/items/upgrade', methods=['POST', 'GET'])
+def item_upgrade():
+    if request.method == 'GET':
+        name = request.args.get('name')
+        id = request.args.get('id')
+        info = request.args.get('info')
+        price = request.args.get('price')
+        session['id'] = id
+        print(id)
+    if request.method == 'POST':
+        username = session.get('username')
+        name = request.form.get('name')
+        info = request.form.get('info')
+        price = request.form.get('price')
+        conn = pymysql.connect(host='localhost', user='root', password='123456')
+        try:
+            cursor = conn.cursor()
+            cursor.execute('use ' + username)
+            sql = "update items set name='%s' where id='%s'" % (name, session.get('id'))
+            print(sql)
+            cursor.execute(sql)
+            sql = "update items set info='%s' where id='%s'" % (info, session.get('id'))
+            cursor.execute(sql)
+            sql = "update items set price='%s' where id='%s'" % (price, session.get('id'))
+            cursor.execute(sql)
+            conn.commit()
+        except Exception:
+            f = open("./data/database_log.txt", 'a')  # 将异常信息写入日志文件中
+            traceback.print_exc(file=f)
+            f.flush()
+            f.close()
+            conn.rollback()
+        finally:
+            conn.close()
+            return redirect(url_for('supplier.supplier_center'))
+    return render_template('supplier/item_upgrade.html', name=name, id=id, info=info, price=price)
+
+

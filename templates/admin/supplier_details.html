@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>企业管理</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../static/css/style.css" type="text/css">
+
+</head>
+
+<body>
+
+    <!-- header -->
+    <div class="header_top">
+        <div class="header_top_left">
+            <a href="{{ url_for('index') }}"><img src="../../static/images/logo.png" height="60" width="60" id="header_top_left_logo" alt=""></a>
+            <a href="{{ url_for('index') }}"><div class="name">iWater | 企业信息</div></a>
+        </div>
+        <div class="header_top_mid">
+            <ul>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">企业管理</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">用户管理</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">订单总览</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">商品管理</a></li>
+            </ul>
+        </div>
+        <div class="header_top_right">
+            <a class="logout" href="{{ url_for('user.logout') }}" >退出登录</a>
+        </div>
+    </div>
+    <!-- header end -->
+
+    <!-- hero body -->
+    <div class="supplier_details">
+        <ul class="supplier_details_head">
+            <li class="supplier_details_head_text">企业名称</li>
+            <li class="supplier_details_head_text">ID</li>
+            <li class="supplier_details_head_text">服务</li>
+            <li class="supplier_details_head_text">启用</li>
+        </ul>
+        <ul class="supplier_details_content">
+            <li class="supplier_details_content_text">{{ supplier.username }}</li>
+            <li class="supplier_details_content_text">{{ supplier.id }}</li>
+            <li class="supplier_details_content_text">{{ supplier.server_on }}</li>
+            <li class="supplier_details_content_text">{{ supplier.isvalid }}</li>
+
+        </ul>
+         <ul class="supplier_details_head">
+            <li class="supplier_details_head_text">企业介绍</li>
+            <li class="supplier_details_head_text">地址</li>
+            <li class="supplier_details_head_text">身份</li>
+         </ul>
+        <ul>
+            <li class="supplier_details_content_text">{{ supplier.info }}</li>
+            <li class="supplier_details_content_text">{{ supplier.address }}</li>
+            <li class="supplier_details_content_text">{{ supplier.identity }}</li>
+            <li class="supplier_details_content_text"><a class="activate_switch" href="{{ url_for('admin.supplier_activate') }}?id={{ supplier.id }}">企业激活</a><br><br><a class="activate_switch" href="{{ url_for('admin.supplier_offline') }}?id={{ supplier.id }}">停止服务</a></li>
+        </ul>
+
+    </div>
+</body>

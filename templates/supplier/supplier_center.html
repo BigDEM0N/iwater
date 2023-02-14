@@ -1,27 +1,64 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <title>企业中心</title>
-    </head>
 
-    {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for msgs in messages %}
-                    <div class="alert alert-info" role="alert">
-                        {{msgs}}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+<head>
+    <meta charset="UTF-8">
+    <title>企业中心</title>
 
-    <body class="size-1140">
-        <a href="javascript:;" onclick="item('{{ username }}')">商品管理</a>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../static/css/style.css" type="text/css">
 
-    </body>
-    <script>
-        function item(username){
-            location.href = '/supplier_center/items'
-        }
-    </script>
-</html>
+</head>
+
+<body>
+
+    <!-- header -->
+    <div class="header_top">
+        <div class="header_top_left">
+            <a href="{{ url_for('index') }}"><img src="../../static/images/logo.png" height="60" width="60" id="header_top_left_logo" alt=""></a>
+            <a href="{{ url_for('index') }}"><div class="name">iWater | 企业中心</div></a>
+        </div>
+        <div class="header_top_mid">
+            <ul>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">商品管理</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">订单管理</a></li>
+                <li class="header_top_mid_content"><a class="header_top_mid_content_text" href="#">基础设置</a></li>
+            </ul>
+        </div>
+        <div class="header_top_right">
+            <p >用户：{{ username }}<a class="logout" href="{{ url_for('user.logout') }}" >退出登录</a></p>
+        </div>
+    </div>
+    <!-- header end -->
+
+    <!-- hero body -->
+    <div class="items_table">
+        <ul class="items_table_head">
+            <li class="items_table_head_text">商品id</li>
+            <li class="items_table_head_text">商品名称</li>
+            <li class="items_table_head_text">商品信息</li>
+            <li class="items_table_head_text">商品价格</li>
+        </ul>
+        <div class="items_table_show">
+            {% for item in item_list %}
+                <ul class="items_table_show_content">
+                    <li class="items_table_show_content_text">{{ item[2] }}</li>
+                    <li class="items_table_show_content_text">{{ item[1] }}</li>
+                    <li class="items_table_show_content_text">{{ item[3] }}</li>
+                    <li class="items_table_show_content_text">{{ item[4] }}</li>
+                    <li class="items_table_show_content_text"><a href="{{ url_for('supplier.item_upgrade') }}?id={{ item[2] }}&name={{ item[1] }}&info={{ item[3] }}&price={{ item[4] }}">修改</a></li>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="item_commit">
+            <form class="item_commit_form" method="post" action="{{ url_for('supplier.item_add') }}">
+                <p><input type="text" name="name" placeholder="商品名"></p>
+                <p><input type="text" name="info" placeholder="详细信息"></p>
+                <p><input type="text" name="price" placeholder="价格"></p>
+                <p><input type="submit" value="提交"></p>
+            </form>
+        </div>
+    <!-- -->
+
+</body>

@@ -1,7 +1,7 @@
 # .\apps\user\view.py
 
 # 创建user的蓝图对象
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, session, url_for, redirect
 from apps.user.models import User
 import hashlib
 from apps.exts import db
@@ -42,3 +42,9 @@ def user_register():
             return render_template('user/user_register.html')
         else:
             return render_template('user/user_register.html')
+
+
+@user_bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))

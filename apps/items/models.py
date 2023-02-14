@@ -8,6 +8,7 @@ class Items(db.Model):
     def __init__(self, key):
         self.__bind_key__ = key
 
+    num = db.Column(db.String(64), nullable=False)
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(20), nullable=False)
     info = db.Column(db.String(256), nullable=True)

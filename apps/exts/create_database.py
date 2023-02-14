@@ -7,16 +7,18 @@ def create_database(name):
     conn = pymysql.connect(host='localhost', user='root', password='123456')
     cursor = conn.cursor()
     try:
-        cursor.execute('create database %s' % name)  # 建库
+        cursor.execute('create database if not exists %s' % name)  # 建库
         cursor.execute('use ' + name)   # 建表
         sql = '''
         create table items(
-            name varchar(10) not null,
+            num varchar(64) not null ,
+            name varchar(64) not null,
             id int auto_increment,
             info varchar(256),
             price float, primary key (id))
         '''
         cursor.execute(sql)
+        conn.commit()
     except Exception:
         f = open("./data/database_log.txt", 'a')  # 将异常信息写入日志文件中
         traceback.print_exc(file=f)
@@ -48,6 +50,7 @@ def create_supplier_table():  # 创建存储企业用户的数据表
                         primary key(id))
         '''
         cursor.execute(sql)
+        conn.commit()
     except Exception:
         f = open("./data/database_log.txt", 'a')  # 将异常信息写入日志文件中
         traceback.print_exc(file=f)
@@ -77,7 +80,7 @@ def create_customer_table():  # 创建存储用户的数据表
                         identity varchar(64))
         '''
         cursor.execute(sql)
-        print('good')
+        conn.commit()
     except Exception:
         f = open("./data/database_log.txt", 'a')  # 将异常信息写入日志文件中
         traceback.print_exc(file=f)
